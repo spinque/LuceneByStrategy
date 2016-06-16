@@ -45,19 +45,6 @@ dependencies {
 }
 
 
-sourceSets {
-  main {
-		java {
-			srcDir 'src/java'
-		}
-	}
-  test {
-		java {
-			srcDir 'src/java'
-		}
-	}
-}
-
 /*****************
 * GWT
 *****************/

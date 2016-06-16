@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'application'
 
 /* Gradle Wrapper */
 task wrapper(type: Wrapper) {
@@ -16,22 +17,38 @@ repositories {
   mavenCentral()
 }
 	
-sourceSets {
-  main {
-		java {
-			srcDir 'src/java'
-		}
-	}
-  test {
-		java {
-			srcDir 'src/java'
-		}
-	}
-}
-
 dependencies {
 	compile	'org.apache.lucene:lucene-core:5.+'
 	compile 'org.apache.lucene:lucene-analyzers-common:5.+'
 	compile 'org.apache.lucene:lucene-queryparser:5.+'
 	compile 'org.apache.lucene:lucene-spatial:5.+'
 }
+
+/*****************
+* Application
+*****************/
+
+mainClassName = 'com.spinque.open.execute.LuceneExecuteStrategyApp'
+applicationName = 'lucene-engine'
+
+task indexScript(type: CreateStartScripts) {
+    mainClassName = 'com.spinque.open.indexer.LuceneIndexerApp'
+    applicationName = "lucene-engine-indexer" 
+    outputDir = new File(buildDir, applicationName)
+    classpath = jar.outputs.files + configurations.runtime
+}
+
+distributions {
+  main {
+  	baseName = 'LuceneEngie'
+    contents {
+    	from(fileTree('dist'))
+    	from(fileTree('config'))
+		  into("bin") {
+        from(indexScript)
+        fileMode = 0755
+      }
+    }
+  }
+}
+
