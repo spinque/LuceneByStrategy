@@ -1,0 +1,118 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+/* Gradle Wrapper */
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.10'
+}
+
+version = '0.1'
+description = 'StrategyEditor'
+
+sourceCompatibility = 1.7
+
+repositories {        
+  mavenCentral()
+}
+	
+/*****************
+* CONFIGURATION
+*****************/
+ext.config {
+	app.name='LuceneByStrategyEditor'
+	app.version.major=version
+	app.version.minor="$version.0"
+	
+	war.baseName=${app.name}
+	
+	deployment.path=/${app.name}-${app.version.major}
+	deployment.version=${app.version.minor}
+	deployment.server.url=http://localhost:8080/manager/text
+	deployment.server.username=admin
+	deployment.server.password=adminadmin
+}
+
+dependencies {
+		// lib-gwt-svg must occur BEFORE gwt-user
+		compile 'org.vectomatic:lib-gwt-svg:0.5.11'
+
+		// only needed at compile-time
+		providedCompile 'com.google.gwt:gwt-user:2.7.0'
+		providedCompile 'com.google.gwt:gwt-dev:2.7.0'
+
+		compile 'org.gwtopenmaps.openlayers:gwt-openlayers-client:1.0'
+		compile 'javax.validation:validation-api:1.0.0.GA'
+		compile 'com.google.gwt:gwt-user:2.7.0'
+		compile 'com.google.gwt:gwt-dev:2.7.0'
+		compile 'com.google.gwt:gwt-servlet:2.7.0'
+		compile 'com.allen-sauer.gwt.dnd:gwt-dnd:3.3.4'
+		compile 'com.google.gwt.google-apis:gwt-maps:1.0.4'
+}
+
+
+sourceSets {
+  main {
+		java {
+			srcDir 'src/java'
+		}
+	}
+  test {
+		java {
+			srcDir 'src/java'
+		}
+	}
+}
+
+/*****************
+* GWT
+*****************/
+task compileGwt (dependsOn: classes, type: JavaExec) {
+	ext.sourceSet = sourceSets.main
+	ext.buildDir = "${project.buildDir}/gwt"
+	ext.extraDir = "${project.buildDir}/extra"
+
+	inputs.source sourceSet.java.srcDirs
+	inputs.dir sourceSet.output.resourcesDir
+	outputs.dir buildDir
+ 
+	doFirst {
+		file(buildDir).mkdirs()
+	}
+ 
+	main = 'com.google.gwt.dev.Compiler'
+ 
+	classpath {
+		[
+			sourceSet.java.srcDirs,						// Java source
+			sourceSet.output.resourcesDir,		// resources
+			sourceSet.output.classesDir,			// classes
+			sourceSet.compileClasspath,				// deps
+		]
+	}
+ 
+	args = [
+		'com.spinque.gwt.EditorApplication',
+		'-war', buildDir,
+		'-logLevel', 'INFO',
+		'-localWorkers', '4',
+		'-compileReport',
+		'-extra', extraDir,
+		'-style','PRETTY', 
+		'-draftCompile' // Speeds up compile with 25%
+	]
+ 
+	maxHeapSize = '512M'
+}
+ 
+/*****************
+* WAR
+*****************/
+webAppDirName = 'war'
+war {
+	dependsOn = [ compileGwt ]
+	baseName = config.war.baseName
+	archiveName = "${config.war.baseName}-${config.app.version.major}.war"
+	from compileGwt.buildDir
+}
+apply from: "$projectDir/deploymentUtils.gradle"

@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+/* Gradle Wrapper */
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.10'
+}
+
+group = 'com.spinque'
+version = '0.1'
+description = 'LuceneEngine'
+
+sourceCompatibility = 1.7
+
+repositories {        
+  mavenCentral()
+}
+	
+sourceSets {
+  main {
+		java {
+			srcDir 'src/java'
+		}
+	}
+  test {
+		java {
+			srcDir 'src/java'
+		}
+	}
+}
+
+dependencies {
+	compile	'org.apache.lucene:lucene-core:5.+'
+	compile 'org.apache.lucene:lucene-analyzers-common:5.+'
+	compile 'org.apache.lucene:lucene-queryparser:5.+'
+	compile 'org.apache.lucene:lucene-spatial:5.+'
+}

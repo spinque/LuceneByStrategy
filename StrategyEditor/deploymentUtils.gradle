@@ -1,0 +1,57 @@
+/**********************************
+Include this script into the build file of web applications
+IMPORTANT: include it AFTER war.archivePath is set
+**********************************/
+
+configurations {
+	tomcatAnt
+}
+dependencies {
+  tomcatAnt 'org.apache.tomcat:tomcat-catalina-ant:7+'
+}
+
+ant.taskdef(name: 'start', classname: 'org.apache.catalina.ant.StartTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'stop', classname: 'org.apache.catalina.ant.StopTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'undeploy', classname: 'org.apache.catalina.ant.UndeployTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'deploy', classname: 'org.apache.catalina.ant.DeployTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'list', classname: 'org.apache.catalina.ant.ListTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'reload', classname: 'org.apache.catalina.ant.ReloadTask', classpath: configurations.tomcatAnt.asPath)
+
+
+task antReDeploy << {
+	if(!project.config.deployment.server.url) 
+		throw new Exception("Task antReDeploy: Property config.deployment.server.url not defined") 
+	if(!project.config.deployment.server.username) 
+		throw new Exception("Task antReDeploy: Property config.deployment.server.username not defined") 
+	if(!project.config.deployment.server.password) 
+		throw new Exception("Task antReDeploy: Property config.deployment.server.password not defined") 
+	if(!project.config.deployment.path) 
+		throw new Exception("Task antReDeploy: Property config.deployment.path not defined") 
+	if(!project.config.deployment.version) 
+		throw new Exception("Task antReDeploy: Property config.deployment.version not defined") 
+
+	ext.p_serverUrl = project.config.deployment.server.url
+	ext.p_username = project.config.deployment.server.username
+	ext.p_password = project.config.deployment.server.password
+
+	ext.p_path = project.config.deployment.path
+	ext.p_archivePath = project.war.archivePath
+	ext.p_version = project.config.deployment.version
+
+	logger.quiet "Stopping ${p_path}"
+	ant.stop(version: p_version, url: p_serverUrl, path: p_path, failonerror: false, username: p_username, password: p_password, outputproperty: 'antStopOutput')
+	logger.quiet ant.properties.antStopOutput
+	logger.quiet ""
+	
+	logger.quiet "Undeploying ${p_path}"
+	ant.undeploy(version: p_version, url: p_serverUrl, path: p_path, failonerror: false, username: p_username, password: p_password, outputproperty: 'antUndeployOutput')
+	logger.quiet ant.properties.antUndeployOutput
+	logger.quiet ""
+
+	logger.quiet "Deploying ${p_path}"
+	ant.deploy(version: p_version, url: p_serverUrl, path: p_path, war: p_archivePath, failonerror: true, username: p_username, password: p_password, outputproperty: 'antDeployOutput')
+	logger.quiet ant.properties.antDeployOutput
+	logger.quiet ""
+}
+
+
