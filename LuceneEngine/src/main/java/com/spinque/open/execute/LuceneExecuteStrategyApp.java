@@ -12,7 +12,7 @@ public class LuceneExecuteStrategyApp {
 	public static void main(String[] args) throws Exception {
 		
 		if (args.length != 3) {
-			System.err.println("Usage: lucene-engine <strategy-file> \"<param>=<value>,<param>=<value>,etc\" <numResults>");
+			System.err.println("Usage: lucene-engine <strategy-file> \"<param>=<value>,...\" <numResults>");
 			System.exit(1);
 		}
 		
