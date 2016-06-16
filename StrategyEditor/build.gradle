@@ -19,18 +19,12 @@ repositories {
 /*****************
 * CONFIGURATION
 *****************/
-ext.config {
-	app.name='LuceneByStrategyEditor'
-	app.version.major=version
-	app.version.minor="$version.0"
-	
-	war.baseName=${app.name}
-	
-	deployment.path=/${app.name}-${app.version.major}
-	deployment.version=${app.version.minor}
-	deployment.server.url=http://localhost:8080/manager/text
-	deployment.server.username=admin
-	deployment.server.password=adminadmin
+ext {
+	appname='LuceneByStrategyEditor'
+	deploy_serverUrl = 'http://localhost:8080/manager/text'
+	deploy_username = 'admin'
+	deploy_password = 'adminadmin'
+	deploy_path = "/${appname}"
 }
 
 dependencies {
@@ -84,10 +78,10 @@ task compileGwt (dependsOn: classes, type: JavaExec) {
  
 	classpath {
 		[
-			sourceSet.java.srcDirs,						// Java source
-			sourceSet.output.resourcesDir,		// resources
-			sourceSet.output.classesDir,			// classes
-			sourceSet.compileClasspath,				// deps
+			sourceSet.java.srcDirs,        // Java source
+			sourceSet.output.resourcesDir, // resources
+			sourceSet.output.classesDir,   // classes
+			sourceSet.compileClasspath     // deps
 		]
 	}
  
@@ -106,13 +100,53 @@ task compileGwt (dependsOn: classes, type: JavaExec) {
 }
  
 /*****************
-* WAR
+* WAR / Deployment
 *****************/
 webAppDirName = 'war'
 war {
 	dependsOn = [ compileGwt ]
-	baseName = config.war.baseName
-	archiveName = "${config.war.baseName}-${config.app.version.major}.war"
+	baseName = appname
+	archiveName = "${appname}-${version}.war"
 	from compileGwt.buildDir
 }
-apply from: "$projectDir/deploymentUtils.gradle"
+
+configurations {
+	tomcatAnt
+}
+dependencies {
+  tomcatAnt 'org.apache.tomcat:tomcat-catalina-ant:7+'
+}
+
+ant.taskdef(name: 'start', classname: 'org.apache.catalina.ant.StartTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'stop', classname: 'org.apache.catalina.ant.StopTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'undeploy', classname: 'org.apache.catalina.ant.UndeployTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'deploy', classname: 'org.apache.catalina.ant.DeployTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'list', classname: 'org.apache.catalina.ant.ListTask', classpath: configurations.tomcatAnt.asPath)
+ant.taskdef(name: 'reload', classname: 'org.apache.catalina.ant.ReloadTask', classpath: configurations.tomcatAnt.asPath)
+
+task reDeploy << {
+
+	logger.quiet "Stopping ${deploy_path}"
+	ant.stop(version: project.version, url: deploy_serverUrl, path: deploy_path, 
+		failonerror: false, username: deploy_username, password: deploy_password, 
+		outputproperty: 'antStopOutput')
+	logger.quiet ant.properties.antStopOutput
+	logger.quiet ""
+	
+	logger.quiet "Undeploying ${deploy_path}"
+	ant.undeploy(version: project.version, url: deploy_serverUrl, path: deploy_path,
+		failonerror: false, username: deploy_username, password: deploy_password, 
+		outputproperty: 'antUndeployOutput')
+	logger.quiet ant.properties.antUndeployOutput
+	logger.quiet ""
+
+	logger.quiet "Deploying ${deploy_path}"
+	ant.deploy(version: project.version, url: deploy_serverUrl, path: deploy_path,
+		war: deploy_archivePath, failonerror: true, username: deploy_username, password: deploy_password,
+		outputproperty: 'antDeployOutput')
+	logger.quiet ant.properties.antDeployOutput
+	logger.quiet ""
+}
+
+
+
