@@ -1,0 +1,77 @@
+<!-- InnerBuildingBlock.ui.xml -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+.cellItem {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+}
+.header {
+  font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  overflow: hidden;
+}
+.details {
+  font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+  font-size: 11px;
+  line-height: 90%;
+  max-height: 40px;
+  overflow-y: auto;
+}
+.details div {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.editButton {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    cursor: pointer;
+    font-size: small;
+    margin: 0;
+    padding: 0px 3px;
+    line-height: 100%;
+    text-decoration: none;
+}
+.cloneButton {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    cursor: pointer;
+    font-size: small;
+    margin: 0;
+    padding: 0px 3px;
+    line-height: 100%;
+    text-decoration: none;
+}
+.deleteButton {
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    cursor: pointer;
+    font-size: small;
+    margin: 0;
+    padding: 0px 3px 1px;
+    text-decoration: none;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.deleteButton:hover {
+	border: 1px solid #C44;
+}
+</ui:style>
+
+<g:HTMLPanel styleName="{style.cellItem}" ui:field="panel">
+  <div class="{style.header}" ui:field="headerDiv">title</div>
+  <div class="{style.details}" ui:field="detailsDiv">
+  	<span>[none]</span>
+  </div>
+  <g:Button styleName="{style.editButton}" ui:field="editButton">edit</g:Button>
+  <g:Button styleName="{style.deleteButton}" ui:field="deleteButton">x</g:Button>
+</g:HTMLPanel>
+
+</ui:UiBinder>

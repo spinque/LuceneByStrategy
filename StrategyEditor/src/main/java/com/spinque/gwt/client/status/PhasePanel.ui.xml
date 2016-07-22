@@ -1,0 +1,107 @@
+<!-- PhasePanel.ui.xml -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+
+.refreshButton {
+  margin: 0px;
+  float: right;
+}
+
+.autoupdateCheckbox {
+  float: right;
+}
+
+.autoupdateCheckbox label {
+  font-size: 10px; 
+  vertical-align: top;
+}
+
+.header {
+  padding: 4px 4px 2px 4px;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: #AAA;
+  text-decoration: none;
+  background-color: #DDDDDD;
+  border-radius: 5px 5px 0px 0px;
+  -moz-border-radius: 5px 5px 0px 0px;
+}
+
+.title {
+  color: #444444;font-weight: bold;
+}
+
+.unknownDiv {
+  background-color:#CCF;
+  padding: 5px 5px 3px 20px;
+  border: 1px solid #44A;
+  margin: 5px 0px 2px 0px;
+}
+
+.busyDiv {
+  background-color:#CCF;
+  /* padding: 5px 5px 3px 20px; */
+  border: 1px solid #44A;
+  margin: 5px 2px 2px 2px;
+}
+
+.busyImg {
+  background-color:#FFF;
+  border: 1px solid #aaa;
+  padding: 3px 10px 3px 10px;
+  margin: 3px 10px 3px 30px;
+  float: center;
+}
+
+.panel {
+  border: 1px solid #a0a0a0;
+  background-color: #F7F7F7;
+  margin: 5px 0px 5px 0px;
+  padding: 0px;
+  /* width: 265px; */
+  border-radius: 5px 5px 0px 0px;
+  -moz-border-radius: 5px 5px 0px 0px;
+}
+
+.mainPanel {
+  border-radius: 0px 0px 5px 5px;
+  -moz-border-radius: 0px 0px 5px 5px;
+  background-color: #F7F7F7;
+  border-width: 0px 1px 1px 1px;
+  padding: 2px 3px 2px 3px;
+}
+
+</ui:style>
+
+<ui:image field='refreshButtonUp' src="refresh_button.png"/>
+
+<g:HTMLPanel ui:field="disclosurePanel" styleName="{style.panel}">
+     <g:HTMLPanel ui:field="header" styleName="{style.header}">
+       <g:PushButton ui:field="refreshButton" styleName="{style.refreshButton}">
+         <g:upFace image="{refreshButtonUp}">
+         </g:upFace>
+	     <g:downFace>
+         </g:downFace>
+	   </g:PushButton> 
+	   <g:CheckBox checked="false" styleName="{style.autoupdateCheckbox}" ui:field="autoUpdateCheckbox" text="auto-update"/>
+	   <span class="{style.title}" ui:field="titleSpan"/>
+     </g:HTMLPanel>
+   <div class="{style.mainPanel}">
+    <g:DeckPanel ui:field="contentDeck">
+     <g:HTMLPanel ui:field="uninitializedState" styleName="{style.unknownDiv}">
+      not known
+     </g:HTMLPanel>
+     <g:HTMLPanel ui:field="busyState" styleName="{style.busyDiv}">
+      <img title="please wait ..." class="{style.busyImg}" src="images/waiting/wait09.gif"/>
+     </g:HTMLPanel>
+     <g:FlowPanel ui:field="contentsPanel">
+   
+     </g:FlowPanel>
+    </g:DeckPanel>
+   </div>
+</g:HTMLPanel>
+
+</ui:UiBinder>

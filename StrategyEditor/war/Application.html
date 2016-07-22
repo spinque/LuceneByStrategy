@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8"/>
+    <title></title>
+
+	<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon" />
+	
+	<script type="text/javascript" language="javascript" src="editorApp/editorApp.nocache.js"></script>
+	<style>
+	.dateBoxPopup {
+	  z-index: 20;
+	 }
+	 div.gwt-SplitLayoutPanel-VDragger {
+	 	background-color: #777;
+	 }
+	 div.gwt-SplitLayoutPanel-HDragger {
+	 	background-color: #777;
+	 }
+	 </style>
+  </head>
+  <body style="background-color: #FFF"> <!--  onload="initZeroClipboard();" -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+    <center id="centerID"></center>
+
+    <div id="placeHolder"></div>
+    <div id="debugDiv"></div>
+    <div id="titleDiv" style="margin:10px 3px 0px 3px;color:#333;font-family:Arial,Verdana,sans-serif;font-size:24px;">
+    </div>
+    
+    <div id="prequelDiv"></div>
+    
+    <table style="margin: 0px;" cellspacing="0" cellpadding="0">
+      <tbody>
+       <tr valign="top">
+        <td width="260px">
+          <div id="strategySelector"></div>
+    	  <div id="parameterContents"></div>
+    	  <div id="facetDropTarget" style="display:none;background-color:#CCF;width:250;border:1px solid #AAA;height:40px;">Drop box</div>
+    	  <div id="patolympicsPanel" style="margin-top: 30px;"></div>
+    	  <div id="groupPanel" style="margin: 10px 0px 1px;"></div>
+    	  <!-- for editor application -->
+    	  <div id="libraryDiv"></div>
+    	  <div id="debugStateDiv"></div>
+    	  <!-- / for editor application -->
+    	</td>
+    	<td>
+    	  <div id="errorContents"></div>
+    	  <div id="strategyStatusDiv"></div>
+    	  
+    	  <!-- for editor application -->
+    	  <div id="strategyControlDiv"></div>
+    	  <div id="strategyTempQuery"></div>
+    	  <div id="strategyCanvasDiv"></div>
+    	  <div id="managerDiv"></div>
+    	  <!-- / for editor application -->
+    	</td>
+       </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

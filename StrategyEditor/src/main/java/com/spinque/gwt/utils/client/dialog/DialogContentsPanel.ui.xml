@@ -1,0 +1,28 @@
+<!-- BuildingBlockEditPanel.ui.xml -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+.mainPanel {
+  padding: 5px;
+}
+.panel {
+  background-color: #f8f8f8;
+  margin: 2px 2px 2px 10px;
+  padding: 5px;
+}
+.buttonPanel{
+  float: right;
+}
+</ui:style>
+
+<g:HTMLPanel ui:field="panel" styleName="{style.mainPanel}">
+  <div ui:field="contentDiv"/> 
+  <div class="{style.buttonPanel}">
+    <g:Button ui:field="cancelButton">Cancel</g:Button>
+    <g:Button ui:field="applyButton">Apply</g:Button>
+  </div>
+</g:HTMLPanel>
+
+</ui:UiBinder>

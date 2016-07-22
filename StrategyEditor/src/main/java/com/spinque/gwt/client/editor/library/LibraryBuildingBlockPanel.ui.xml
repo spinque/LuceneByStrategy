@@ -1,0 +1,78 @@
+<!-- LibraryBuildingBlockPanel.ui.xml -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style type="com.spinque.gwt.client.editor.library.LibraryBuildingBlockPanel.Style">
+
+.panel {
+  /* To have it hover over the actual canvas:
+     position: fixed; 
+     left: 0px;
+     top: 100px;
+  */
+  padding-right: 4px;
+}
+
+.header {
+  font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #666666;
+  -moz-border-radius: 0px 5px 0 0;
+  background-color: #F8F8F8;
+  border-color: #AAAAAA;
+  border-style: solid;
+  border-width: 1px 1px 0;
+  margin: 0;
+  padding: 15px 4px 2px 4px;
+}
+
+.sectionHeader {
+  font-size: 11px;
+  font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+  color: #666;  
+  background-color: #FFF;
+  border-color: #E2E2E2;
+  border-style: solid;
+  border-width: 1px 0 0;
+  padding: 6px 4px 7px;
+}
+
+.items {
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  background-color: #FFF;
+  padding: 0px;
+}
+.stackPanel {
+  margin: 0px;
+}
+
+.hideShow {
+  color: #444444;
+  font-size: 10px;
+  padding: 3px 0;
+  float: right;
+  display: none;
+}
+</ui:style>
+
+<g:DockLayoutPanel styleName="{style.panel}" ui:field="libraryPanel" unit="PX">
+  <g:north size="30">
+  	<g:HTMLPanel styleName="{style.header}" ui:field="headerDiv">
+  		<div class="{style.hideShow}">
+    		<g:Anchor ui:field="showSpan">show</g:Anchor>|<g:Anchor ui:field="hideSpan">hide</g:Anchor>
+  		</div>
+  		<span>Building Block Library</span>
+  	</g:HTMLPanel>
+  </g:north>
+  <g:center> 
+    <!-- class="{style.items}" ui:field="itemsDiv"> -->
+    <g:StackLayoutPanel styleName="{style.stackPanel}" ui:field="stackPanel" unit="PX">
+      <!-- is filled upon initialization -->
+    </g:StackLayoutPanel>
+  </g:center>
+</g:DockLayoutPanel>
+
+</ui:UiBinder>

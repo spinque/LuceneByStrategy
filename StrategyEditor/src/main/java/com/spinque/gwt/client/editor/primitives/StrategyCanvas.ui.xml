@@ -1,0 +1,99 @@
+<!-- StrategyCanvas.ui.xml -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:svgui='urn:import:org.vectomatic.dom.svg.ui'>
+
+<ui:style>
+.workPanel {
+  margin: 0px;
+  padding: 0px;
+  width: 1900px;
+  height: 1200px;
+  border: 1px solid #AAA;
+  background-color: #FFF;  
+}
+.ne {
+  font-family: Arial;
+  font-size: 9px;
+  font-weight: bold;
+}
+.blockTitle {
+  font-family: Arial;
+  font-size: 11px;
+  text-anchor: begin;
+}
+
+.box {
+ cursor: move;
+}
+.sessionDiv {
+  border: 1px solid #CCC;
+  background-color: #FFF;
+  padding: 2px;
+  color: #CCC;
+  font-size: 9px;
+}
+</ui:style>
+
+<g:AbsolutePanel styleName="{style.workPanel}" ui:field="workpane">
+  <g:at left="10" top="10">
+    <g:Label styleName="{style.sessionDiv}" ui:field="sessionIDField">#session</g:Label>
+  </g:at>
+  <!-- <div ui:field="workpanel"></div> -->
+  <g:at left="0" top="0">
+  <svgui:SVGImage ui:field="svgImg">
+ <svg ui:field="canvas" version="1.1" width="1900" height="1200" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgb(180,180,255);stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:rgb(220,220,255);stop-opacity:0.6" />
+    </linearGradient>
+    <pattern id="diagonalHatch" patternUnits="userSpaceOnUse" x="0" y="0" width="10" height="10">
+		<g style="stroke: rgb(154, 154, 154); stroke-width: 4;">
+			<path d="M0 0 l10,10"/>				
+			<path d="M-10 0 l20,20"/>				
+			<path d="M0 -10 l20,20"/>
+		</g>
+	</pattern>
+  </defs>
+   <g ui:field="lineContainer">
+   </g>
+ <!-- <g ui:field="block" transform="translate(0.0 0.0)">
+    <rect class="{style.box}" fill="#bfd2e9" rx="5" ry="5" x="0.5" y="10.5"
+          fill-opacity=".5" stroke="#000000" height="79" width="199"/>
+    <text class="{style.blockTitle}">
+      <tspan ui:field="titleText" font-weight="bold" x="10" y="28">rank_NE_point0</tspan>
+      <tspan ui:field="details1Text" x="10" y="40">details 1</tspan>
+      <tspan ui:field="details2Text" x="10" y="52">details 2</tspan>
+      <tspan ui:field="details3Text" x="10" y="64">details 3</tspan>
+      <tspan ui:field="details4Text" x="10" y="76">details 4</tspan>
+	</text>
+	<g ui:field="sourcePoint1" cursor="pointer" transform="translate(143.5 84.5)">
+      <g style="fill:#bfd2e9;stroke:#000000;">
+        <rect height="12" rx="2" ry="2" width="50" x="0" y="0"/>
+      </g>
+      <text class="{style.ne}" x="4.5" y="9.5">NE</text>
+    </g>
+    <g ui:field="destPoint1" cursor="pointer" transform="translate(5.5 3.5)">
+      <g style="fill:#bfd2e9;stroke:#000000;">
+        <rect height="12" rx="2" ry="2" width="50" x="0" y="0"/>
+      </g>
+      <text class="{style.ne}" x="4.5" y="9.5">NE</text>
+    </g>
+  </g> -->
+  <g ui:field="blockContainer">
+  </g>
+  <g transform="translate(30.0 500.0)" ui:field="resultMarker" cursor="pointer">
+    <!-- Result marker: a shape that represents a cube that encloses a sourcePoint -->
+    <path ui:field="resultCircleElement"
+       d="m 32.5,-4.5 c -1.108,0 -2,0.892 -2,2 l 0,2 18,0 c 1.108,0 2,0.892 2,2 l 0,8 c 0,1.108 -0.892,2 -2,2 l -18,0 0,12 c 0,1.108 0.892,2 2,2 l 26,0 c 1.108,0 2,-0.892 2,-2 l 0,-26 c 0,-1.108 -0.892,-2 -2,-2 l -26,0 z"
+       style="opacity:0.60;fill:#ff6000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;" />
+    <text x="32" y="24" style="font-size:9px;opacity:0.80;fill:#000000;font-family:Arial Black;">
+       <tspan style="font-size:9px;font-family:Verdana;">result</tspan></text>
+  </g>
+ </svg>
+</svgui:SVGImage>
+</g:at>
+</g:AbsolutePanel>
+
+</ui:UiBinder>

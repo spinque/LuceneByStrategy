@@ -111,7 +111,7 @@ ant.taskdef(name: 'deploy', classname: 'org.apache.catalina.ant.DeployTask', cla
 ant.taskdef(name: 'list', classname: 'org.apache.catalina.ant.ListTask', classpath: configurations.tomcatAnt.asPath)
 ant.taskdef(name: 'reload', classname: 'org.apache.catalina.ant.ReloadTask', classpath: configurations.tomcatAnt.asPath)
 
-task reDeploy << {
+task reDeploy(dependsOn: war) << {
 
 	logger.quiet "Stopping ${deploy_path}"
 	ant.stop(version: project.version, url: deploy_serverUrl, path: deploy_path, 
@@ -129,7 +129,7 @@ task reDeploy << {
 
 	logger.quiet "Deploying ${deploy_path}"
 	ant.deploy(version: project.version, url: deploy_serverUrl, path: deploy_path,
-		war: deploy_archivePath, failonerror: true, username: deploy_username, password: deploy_password,
+		war: war.archivePath, failonerror: true, username: deploy_username, password: deploy_password,
 		outputproperty: 'antDeployOutput')
 	logger.quiet ant.properties.antDeployOutput
 	logger.quiet ""

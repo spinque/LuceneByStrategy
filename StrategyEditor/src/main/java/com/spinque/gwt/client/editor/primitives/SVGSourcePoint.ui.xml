@@ -1,0 +1,35 @@
+<!-- SVGSourcePoint.ui.xml -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:svgui='urn:import:org.vectomatic.dom.svg.ui'>
+             
+<ui:style>
+
+.ne {
+  font-family: Arial;
+  font-size: 9px;
+  font-weight: bold;
+}
+.blockTitle {
+  font-family: Arial;
+  font-size: 11px;
+  text-anchor: begin;
+}
+
+.box {
+ cursor: move;
+}
+</ui:style>
+
+<svgui:SVGImage ui:field="svgImg">
+ <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g ui:field="sourcePoint" cursor="pointer">
+      <rect style="fill:#fff;fill-opacity:1;" height="12" rx="2" ry="2" width="50" x="0" y="0"/>
+      <rect ui:field="rect" style="fill:#aaa;fill-opacity:0.8;stroke:#000;" height="12" rx="2" ry="2" width="50" x="0" y="0"/>
+      <text ui:field="title" class="{style.ne}" x="2.5" y="9.5">NE</text>
+    </g>
+ </svg>
+</svgui:SVGImage>
+
+</ui:UiBinder>
+

@@ -1,0 +1,48 @@
+<!-- BuildingBlockEditPanel.ui.xml -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+.mainPanel {
+  padding: 5px;
+}
+.panel {
+  background-color: #f8f8f8;
+  margin: 2px 2px 2px 10px;
+  padding: 10px 5px 5px 5px;
+}
+.buttonPanel{
+  float: right;
+}
+.noItems {
+  display: none;
+  border: 1px solid #888;
+  padding: 10px 10px 10px 10px;
+  margin: 25px 5px 5px 5px;
+}
+.title {
+  padding: 2px 2px 20px 2px;
+}
+</ui:style>
+
+<g:HTMLPanel styleName="{style.mainPanel}">
+  <div class="{style.title}">Building Block: <span ui:field="nameSpan"/></div>
+  <div style="max-width: 400px;">
+    Fill out the values for the fields below. Use a name enclosed in percentage 
+    signs '%' to make that name a query-parameter of the strategy. 
+    For example: if in block 'search' the value <code>body:&quot;%TOPIC%&quot;</code> was used 
+    for the queryString field, it would make the strategy ask for an argument 
+    called TOPIC, and would use it to search the body text.
+  </div>
+   
+  <div class="{style.panel}">
+    <u>Parameter controls:</u>
+    <div ui:field="noItems" class="{style.noItems}">
+      [ this block has no controls that need to be configured ] 
+    </div>
+    <g:VerticalPanel ui:field="controlsPanel">
+    </g:VerticalPanel>
+  </div>
+</g:HTMLPanel>
+
+</ui:UiBinder>

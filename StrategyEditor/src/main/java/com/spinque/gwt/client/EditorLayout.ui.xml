@@ -1,0 +1,39 @@
+<!-- EditorLayout.ui.xml -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+			 xmlns:l='urn:import:com.spinque.gwt.client.editor.library'
+			 xmlns:s='urn:import:com.spinque.gwt.client.status'
+			 xmlns:m='urn:import:com.spinque.gwt.client'
+			 xmlns:c='urn:import:com.spinque.gwt.client.editor.primitives'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style>
+.logo {
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-top: -4px;
+}
+</ui:style>
+
+<g:DockLayoutPanel ui:field="root" unit="PX">
+	<g:north size="70">
+		<g:HTMLPanel>
+			<img class="{style.logo}" src="images/spinque_logo_editor.png"/>
+		</g:HTMLPanel>
+	</g:north>
+	
+	<g:east size="300">
+		<s:StrategyDebugPanel ui:field="status"/>
+	</g:east>
+
+	<g:west size="250">
+		<l:LibraryBuildingBlockPanel ui:field="library"/>
+	</g:west>
+	
+	<g:center>
+	    <g:ScrollPanel>
+			<c:StrategyCanvas ui:field="canvas"/>
+		</g:ScrollPanel>
+	</g:center>
+</g:DockLayoutPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,75 @@
+<!-- ParameterControlEditPanel.ui.xml -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:editor='urn:import:com.spinque.gwt.client.editor'>
+
+<ui:style>
+.panel {
+  border: 1px solid #a0a0a0;
+  background-color: #f8f8f8;
+  margin: 1px;
+  padding: 5px;
+}
+.tab {
+  border: 1px solid #a0a0a0;
+  background-color: #eee;
+  margin: 2px 2px 2px 30px;
+  padding: 3px;
+}
+
+.item {
+  background-color: #ddd; 
+  margin: 1px; 
+  padding: 0px 1px 0px 5px; 
+  font-size: 12px; 
+  height: 18px;
+}
+
+.textbox {
+  float: right; 
+  height: 14px; 
+  padding: 1px; 
+  border: 1px solid #AAA; 
+  right: 10px;
+}
+</ui:style>
+
+<g:HTMLPanel styleName="{style.panel}">
+  <div>
+    Parameter control: <span ui:field="paramSpan"/> (<span ui:field="typeSpan"/>)
+    <g:CheckBox ui:field="configurableCheckBox">User-configurable</g:CheckBox>
+  </div>
+  <g:DeckPanel ui:field="contentDeck">
+  <g:HTMLPanel ui:field="configurablePane">
+    <table class="{style.tab}">
+      <tr class="{style.item}">
+        <td>Name (in REST interface):</td> 
+    	<td><g:TextBox styleName="{style.textbox}" ui:field="nameTextBox"/></td>
+      </tr>
+      <tr class="{style.item}">
+        <td>Label:</td> 
+        <td><g:TextBox styleName="{style.textbox}" ui:field="titleTextBox"/></td>
+      </tr>
+      <tr class="{style.item}">
+        <td>Cluster (optional):</td>
+        <td><g:TextBox styleName="{style.textbox}" ui:field="clusterTextBox"/></td>
+      </tr>
+      <tr class="{style.item}">
+        <td>Default value: </td>
+        <td><editor:ValueBox ui:field="defaultValueBox"/></td>
+      </tr>
+      <tr class="{style.item}">
+        <td>Additional format options:</td> 
+        <td><g:TextBox styleName="{style.textbox}" ui:field="formatOptionsTextBox"/></td>
+      </tr>
+    </table>
+  </g:HTMLPanel>
+  <g:HTMLPanel ui:field="fixedPane">
+  <div class="{style.tab}" ui:field="panelB">
+    <div class="{style.item}">Fixed value: <g:TextBox styleName="{style.textbox}" ui:field="fixedValueTextBox"/></div>
+  </div>
+  </g:HTMLPanel>
+  </g:DeckPanel>
+</g:HTMLPanel>
+
+</ui:UiBinder>

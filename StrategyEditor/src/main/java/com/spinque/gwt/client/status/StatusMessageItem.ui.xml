@@ -1,0 +1,29 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  <!-- <ui:with field='res' type='com.spinque.gwt.client.status.Resources'/> -->
+
+
+  <ui:style type="com.spinque.gwt.client.status.StatusMessageItem.Style">
+  .statusOK    { border-color: #9EC49F; background-color: #DDFADE; background-image: url('images/status/ok.png'); }
+  .statusError { border-color: #DF9898; background-color: #FFE7E7; background-image: url('images/status/error.png');  }
+  .statusWarn  { border-color: #F7DF92; background-color: #FFFFDD; background-image: url('images/status/warning.png');  }
+  .statusInfo  { border-color: #9EB6D4; background-color: #E0EFFF; background-image: url('images/status/info.png');  }
+  
+  .item {
+  	border: 1px solid #AAA;
+  	margin: 5px 0px 5px 0px;
+  	background-color: #FFF;
+    background-repeat: no-repeat;
+    background-position: 10px 3px; 
+    padding: 3px 10px 3px 34px;
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+  }
+  </ui:style>
+
+  <g:HTMLPanel>
+    <div ui:field="messageDiv" class="{style.item}">
+    </div>
+  </g:HTMLPanel>
+</ui:UiBinder>

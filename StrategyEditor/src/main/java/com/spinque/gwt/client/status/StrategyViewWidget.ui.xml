@@ -1,0 +1,64 @@
+<!-- StrategyViewWidget.ui.xml -->
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+<ui:style type="com.spinque.gwt.client.status.StrategyViewWidget.CodeStyle">
+.io {
+  border: 1px solid #288;
+  background-color: #CDD;
+  color: #288;
+  border-radius: 4px;
+  padding: 0px 2px;
+  margin: 0px 2px;
+}
+.original {
+  border: 1px solid #228;
+  background-color: #CCD;
+  color: #228;
+  border-radius: 4px;
+  padding: 0px 2px;
+  margin: 0px 2px;
+}
+
+.variable {
+  border: 1px solid #282;
+  background-color: #CDC;
+  color: #282;
+  border-radius: 4px;
+  padding: 0px 2px;
+  margin: 0px 2px;
+}
+
+.panel {
+  background-color: #FFF;
+  width: 600px;
+  height: 400px;
+  padding: 5px;
+  overflow: auto;
+}
+.description {
+   margin: 0 0 0 50px;
+   font-size: smaller;
+}
+.code {
+  border: 1px dashed #CCC;
+  padding: 2px;
+  background-color: #F2F2F2;
+  font-size: smaller;
+  overflow: auto;
+  margin:0;
+  margin: 0 0 0 50px;
+}
+.hd {
+  margin-top: 10px;
+}
+</ui:style>
+
+<g:HTMLPanel styleName="{style.panel}" ui:field="panel">
+  <div>Description</div>
+  <div class="{style.description}" ui:field="descriptionDiv"/>
+  <div class="{style.hd}">Code</div>
+  <pre class="{style.code}" ui:field="codeDiv"/>
+</g:HTMLPanel>
+
+</ui:UiBinder>

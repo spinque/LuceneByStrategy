@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='rest'>
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name="com.google.gwt.core.Core"/>
+  <inherits name="com.google.gwt.user.History"/>
+  <inherits name="com.google.gwt.i18n.I18N"/>
+  
+  <inherits name='com.google.gwt.uibinder.UiBinder' />
+
+  <!-- Other module inherits                                      -->
+  <extend-property name="locale" values="en"/>
+    
+  <!-- allows for reading resources on the client -->
+  <inherits name="com.google.gwt.resources.Resources" />
+</module>

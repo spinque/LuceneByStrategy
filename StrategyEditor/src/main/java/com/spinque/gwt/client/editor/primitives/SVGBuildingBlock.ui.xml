@@ -1,0 +1,130 @@
+<!-- SVGBuildingBlock.ui.xml -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:svgui='urn:import:org.vectomatic.dom.svg.ui'
+            >
+             
+<ui:style type="com.spinque.gwt.client.editor.primitives.SVGBuildingBlock.Style">
+
+.ne {
+  font-family: Arial;
+  font-size: 9px;
+  font-weight: bold;
+}
+.blockTitle {
+  font-family: Arial;
+  font-size: 11px;
+  text-anchor: begin;
+}
+
+.box {
+ cursor: move;
+}
+
+.btnEdit {
+}
+.btnEdit-up {
+}
+.btnEdit-up-disabled {
+}
+.btnEdit-down-hovering {
+}
+
+.btnDelete {
+}
+.btnDelete-up {
+}
+.btnDelete-up-disabled {
+}
+.btnDelete-down-hovering {
+}
+
+</ui:style>
+
+<svgui:SVGImage>
+ <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <g ui:field="block" transform="translate(0.0 0.0)"> <!-- type="block" transform="translate(70.0 260.0)" -->
+    <rect ui:field="blockRect" class="{style.box}" fill="#bfd2e9" rx="5" ry="5" x="0.5" y="10.5"
+          fill-opacity=".5" stroke="#000000" height="79" width="199"/>
+          <!-- fill="#bfd2e9" fill="url(#grad1)" -->
+	  <!-- The 'switch' element will process the first child element
+       whose testing attributes evaluate to true.-->
+  <switch>
+ 
+    <!-- Process the embedded XHTML if the requiredExtensions attribute
+         evaluates to true (i.e., the user agent supports XHTML
+         embedded within SVG). -->
+    <foreignObject x="5" y="15" width="190" height="70" ui:field="innerPane"
+                   requiredExtensions="http://www.w3.org/1999/xhtml">
+      <!-- XHTML content goes here, unfortunately lib-gwt-svg does not allow HTML content here.
+        Current solution: insert the element after the object has been created.
+        <p xmlns="http://www.w3.org/1999/xhtml">Here is a paragraph that requires word wrap</p> 
+      -->
+    </foreignObject>
+ 
+    <!-- Else, process the following alternate SVG.
+         Note that there are no testing attributes on the 'text' element.
+         If no testing attributes are provided, it is as if there
+         were testing attributes and they evaluated to true.-->
+    <g>
+      <!--
+      <text font-size="10" font-family="Verdana">
+        <tspan x="10" y="10">ERROR: Your browser should support SVG.</tspan>
+      </text>
+      -->
+      <text class="{style.blockTitle}">
+        <tspan ui:field="titleText" font-weight="bold" x="10" y="28"></tspan>
+        <tspan ui:field="details1Text" x="10" y="40"></tspan>
+        <tspan ui:field="details2Text" x="10" y="52"></tspan>
+        <tspan ui:field="details3Text" x="10" y="64"></tspan>
+        <tspan ui:field="details4Text" x="10" y="76"></tspan>
+	  </text>
+    <g ui:field="editRect" transform="translate(154 13.5)">
+		<rect fill="#8888a2" rx="2" ry="2" x="0" y="0"
+	          		fill-opacity=".6" stroke="#000000" height="13" width="24"/>
+		<text>
+			<tspan x="1" y="11">edit</tspan>
+		</text>
+	  </g>
+	  <g ui:field="deleteRect" transform="translate(181 13.5)">
+		<rect fill="#a28888" rx="2" ry="2" x="0" y="0"
+	          		fill-opacity=".6" stroke="#000000" height="13" width="15"/>
+		<text>
+			<tspan font-weight="bold" x="4" y="10">x</tspan>
+		</text>
+	  </g>
+	</g>
+  </switch>
+  
+	<g ui:field="sourcePoints" cursor="pointer" transform="translate(143.5 84.5)"></g>
+	<g ui:field="destPoints" cursor="pointer" transform="translate(5.5 3.5)"></g>
+	
+<!-- <svgui:SVGPushButton ui:field="editButton">
+		<svgui:element>
+        	<svg viewBox="0 0 200 60" width="200" height="60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        		<rect ui:field="editRect" fill="#a26666" rx="2" ry="2" x="169.5" y="13.5"
+		          		fill-opacity=".8" stroke="#000000" height="12" width="12"/>
+            </svg>
+		</svgui:element>
+		<svgui:upFace><svgui:styleChange classNames="{style.btnEdit} {style.btnEdit-up}"/></svgui:upFace>
+		<svgui:upDisabledFace><svgui:styleChange classNames="{style.btnEdit} {style.btnEdit-up-disabled}"/></svgui:upDisabledFace>
+		<svgui:downHoveringFace><svgui:styleChange classNames="{style.btnEdit} {style.btnEdit-down-hovering}"/></svgui:downHoveringFace>
+	</svgui:SVGPushButton>
+	<svgui:SVGPushButton ui:field="deleteButton">
+		<svgui:element>
+        	<svg viewBox="0 0 200 60" width="200" height="60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        		<rect ui:field="deleteRect" fill="#a26666" rx="2" ry="2" x="184.5" y="13.5"
+		          		fill-opacity=".8" stroke="#000000" height="12" width="12"/>
+            </svg>
+		</svgui:element>
+		<svgui:upFace><svgui:styleChange classNames="{style.btnDelete} {style.btnDelete-up}"/></svgui:upFace>
+		<svgui:upDisabledFace><svgui:styleChange classNames="{style.btnDelete} {style.btnDelete-up-disabled}"/></svgui:upDisabledFace>
+		<svgui:downHoveringFace><svgui:styleChange classNames="{style.btnDelete} {style.btnDelete-down-hovering}"/></svgui:downHoveringFace>
+	</svgui:SVGPushButton> -->
+  </g>
+ </svg>
+</svgui:SVGImage>
+
+</ui:UiBinder>
+
